@@ -14,7 +14,6 @@ import gui_main.GUI;
 public class Main {
 
 	
-	
 	private static Object[] GUI_field;
 	private static FieldAction[] fieldActions;
 	

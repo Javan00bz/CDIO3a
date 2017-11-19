@@ -1,0 +1,8 @@
+Velkommen
+Spiller 1, indtast dit navn
+Navnene kan ikke være ens, prøv igen.
+Spiller 2, indtast dit navn
+Indtast et andet navn
+, det er din tur, tryk her for at slå med terningerne.
+Der er noget galt
+, du har vundet spillet!

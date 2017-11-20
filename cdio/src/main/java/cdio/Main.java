@@ -2,124 +2,103 @@ package cdio;
 
 import java.awt.Color;
 
-import cdio.Fields.FieldAction;
+import javax.print.attribute.HashPrintServiceAttributeSet;
+
 import gui_fields.GUI_Car;
-import gui_fields.GUI_Car.Pattern;
-import gui_fields.GUI_Car.Type;
+import gui_fields.GUI_Empty;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
-
 public class Main {
 
-	
-	private static Object[] GUI_field;
-	private static FieldAction[] fieldActions;
-	
+	private GUI gui = new GUI();
+	private Player Player1;
+	private Player Player2;
+	private Player Player3;
+	private Player Player4;
+	private Player[] Players = {Player1, Player2, Player3, Player4};
+	private GUI_Player GUI_Player1;
+	private GUI_Player GUI_Player2;
+	private GUI_Player GUI_Player3;
+	private GUI_Player GUI_Player4;
+	private GUI_Player[] GUI_Players = {GUI_Player1, GUI_Player2, GUI_Player3, GUI_Player4};
+	private GUI_Car Car1;
+	private GUI_Car Car2;
+	private GUI_Car Car3;
+	private GUI_Car Car4;
+	private GUI_Car[] GUI_Cars = {Car1, Car2, Car3, Car4};
+	private int startingMoney;
+	private DiceCup cup = new DiceCup(1);
+	private int amountOfPlayers;
 	public static void main(String[] args) {
-
-		GUI_Field[] fields = generateFields();
-		GUI gui = new GUI(fields);
-
-		String amountOfPlayers = gui.getUserButtonPressed("How many players?", "2", "3", "4");
-		int playerCount = Integer.parseInt(amountOfPlayers);
-		
-		Player[] players = new Player[playerCount];
-		for(int i = 0; i < players.length; i++)
-		{
-			players[i] = generatePlayers(gui);
-			
-		}
-		
-		DiceCup dicecup = new DiceCup(1);
-		while(true) {
-			
-			for(int i = 0; i < playerCount; i++)
-			{
-				Player player = players[i];
-				playerTurn(gui, player, dicecup);
-				fieldActions[player.getPosition()].action(player, players, fields[player.getPosition()], gui);
-			}
-		}
+		new Main().playGame();
 	}
 
-
-
-
-
-	private static void playerTurn(GUI gui, Player player, DiceCup dicecup) {
-		int position = player.getPosition();
-		gui.getUserButtonPressed("next", "next");
-		gui.getFields()[position].setCar(player, false);
-		dicecup.rollDiceCup();
-		gui.setDice(dicecup.getSum(), dicecup.getSum(), 1, 1, dicecup.getSum(), dicecup.getSum(), 1, 1);
-		position = position + dicecup.getSum();
-		if (position>23)
-			position = position -23;
-		gui.getFields()[position].setCar(player, true);
-		
-		player.setPosition(position);
+	private void playGame(){
+		startGame();
+		for(int i = 0; i<amountOfPlayers; i++) {
+			playerTurn(Players[i], GUI_Players[i]);
+			if (i == amountOfPlayers-1)
+				i=-1;}
 	}
 
+	public void startGame() {
+		gui.showMessage("Welcome");
+		amountOfPlayers = gui.getUserInteger("How many players are you", 2, 4);
+		switch (amountOfPlayers) {
+		case 2: startingMoney = 20;
+		break;
+		case 3: startingMoney = 18;
+		break;
+		case 4: startingMoney = 16;
+		break;
+		default: startingMoney = 20;
+		}
+		int j = 0;
+		for(int i=0; i < amountOfPlayers; i++) {
+			j++;
+			String playerName = gui.getUserString("Player " + j + " Enter your name" );
+			Players[i] = new Player(playerName, startingMoney, 0);
+			GUI_Cars[i] = new GUI_Car(); 
+			GUI_Players[i] = new GUI_Player(Players[i].getName(), Players[i].getAccount().getValue(), GUI_Cars[i]);
+			gui.addPlayer(GUI_Players[i]);
+			gui.getFields()[Players[i].getPosition()].setCar(GUI_Players[i], true);
+		}
 
-	private static Player generatePlayers(GUI gui) {
-		GUI_Car gui_car1 = new GUI_Car(Color.WHITE, Color.WHITE, Type.TRACTOR, Pattern.CHECKERED);
-		gui_car1 = userDefinedCar(gui);
-		Player Player1 = new Player(gui.getUserString("indtast navn"), 0, 1000, gui_car1);
-		gui.getFields()[0].setCar(Player1, true);
+	}
+	public void playerTurn(Player Pl, GUI_Player Gpl) {
+		gui.showMessage("click to roll");
+		cup.rollDiceCup();
+		gui.setDice(cup.getDice()[0].getFaceValue(), 4, 4, 10, cup.getDice()[0].getFaceValue(), 4, 4, 10);
+		gui.getFields()[Pl.getPosition()].setCar(Gpl, false);
+		Pl.setPosition(Pl.getPosition() + cup.getDice()[0].getFaceValue());
+		if (Pl.getPosition()<24)
+			gui.getFields()[Pl.getPosition()].setCar(Gpl, true);
+		else {
+			Pl.setPosition(Pl.getPosition()-24);
+			gui.getFields()[Pl.getPosition()].setCar(Gpl, true);
+		}
 
-		return Player1;
 	}
 
-	private static GUI_Field[] generateFields() {
-		String[] fieldText = Translater.file("file1.txt");
-		String[] fieldDescription = Translater.file("file2.txt");
-		
-		GUI_Field[] fields = new GUI_Field[24];
-		fieldActions = new FieldAction[fields.length];
-		for (int i = 0; i < fields.length; i++) {
-			GUI_Street gui_street = new GUI_Street();
-			gui_street.setTitle(fieldText[i]);
-			fields[i] = gui_street;
-		}
-		
-		//Specify field actions
-		for(int i = 0; i < fields.length; i++)
-		{
-			fieldActions[i] = Fields.empty;
-			/*
-			fieldActions[i] = new FieldAction() {
-				public void action(Player player, Player[] players, GUI_Field field, GUI gui) {
-					
-				}
-			};
-			*/
-		}
-		
-		
-		return fields;
-	}
+	private void initializeGUI() {
 
-	private static GUI_Car userDefinedCar(GUI gui) {
-		String color = gui.getUserButtonPressed("choose the colour of your car", "RED", "GREEN", "BLUE", "YELLOW");
 
-		GUI_Car gui_car = new GUI_Car();
-		if (color == "RED") {
-			gui_car.setPrimaryColor(Color.RED);
+		GUI_Field [] fields = new GUI_Field[40];
+
+		for (int i = 0; i < 25; i++) {
+			fields[i] = new GUI_Street();
+			fields[i].setTitle("title1");
 		}
-		if (color == "GREEN") {
-			gui_car.setPrimaryColor(Color.GREEN);
+		// Lav tomme felter som ikke skal bruges
+		for (int i = 25; i < fields.length; i++) {
+			fields[i] = new GUI_Empty();
+
 		}
-		if (color == "BLUE") {
-			gui_car.setPrimaryColor(Color.BLUE);
-		}
-		if (color == "YELLOW") {
-			gui_car.setPrimaryColor(Color.YELLOW);
-		}
-		return gui_car;
+
+
 	}
 
 }
-
-

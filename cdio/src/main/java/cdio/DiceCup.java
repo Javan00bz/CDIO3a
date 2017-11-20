@@ -32,4 +32,10 @@ public class DiceCup {
 		}
 		return sum;
 	}
+
+	public Dice[] getDice() {
+		return dice;
+	}
+	
+	
 }

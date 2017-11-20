@@ -5,6 +5,7 @@ import java.awt.Color;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Empty;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
@@ -12,21 +13,8 @@ import gui_main.GUI;
 public class Game {
 
 	private GUI gui = new GUI(generateFields());
-	private Player Player1;
-	private Player Player2;
-	private Player Player3;
-	private Player Player4;
-	private Player[] Players = {Player1, Player2, Player3, Player4};
-	private GUI_Player GUI_Player1;
-	private GUI_Player GUI_Player2;
-	private GUI_Player GUI_Player3;
-	private GUI_Player GUI_Player4;
-	private GUI_Player[] GUI_Players = {GUI_Player1, GUI_Player2, GUI_Player3, GUI_Player4};
-	private GUI_Car Car1;
-	private GUI_Car Car2;
-	private GUI_Car Car3;
-	private GUI_Car Car4;
-	private GUI_Car[] GUI_Cars = {Car1, Car2, Car3, Car4};
+	private Player[] Players;
+	private GUI_Player[] GUI_Players;
 	private int startingMoney;
 	private DiceCup cup = new DiceCup(1);
 	private int amountOfPlayers;
@@ -36,10 +24,9 @@ public class Game {
 
 	private void playGame(){
 
-
 		startGame();
 		for(int i = 0; i<amountOfPlayers; i++) {
-			playerTurn(Players[i], GUI_Players[i]);
+			playerTurn(i);
 			if (i == amountOfPlayers-1)
 				i=-1;}
 	}
@@ -56,44 +43,49 @@ public class Game {
 		break;
 		default: startingMoney = 20;
 		}
+		Player[] Players = new Player[amountOfPlayers];
+		GUI_Player[] GUI_Players = new GUI_Player[amountOfPlayers];
 		int j = 0;
 		for(int i=0; i < amountOfPlayers; i++) {
 			j++;
 			String playerName = gui.getUserString("Player " + j + ", enter your name" );
-			Players[i] = new Player(playerName, startingMoney, 0);
+			Player player = new Player(playerName, startingMoney, 0);
+			Players[i] = player;
 			String color = gui.getUserButtonPressed("Player " + j + ", choose the colour of your car", "RED", "GREEN", "BLUE", "YELLOW");
-			GUI_Cars[i] = new GUI_Car();
+			GUI_Car car = new GUI_Car();
 			if (color == "RED") {
-				GUI_Cars[i].setPrimaryColor(Color.RED);
+				car.setPrimaryColor(Color.RED);
 			}
 			if (color == "GREEN") {
-				GUI_Cars[i].setPrimaryColor(Color.GREEN);
+				car.setPrimaryColor(Color.GREEN);
 			}
 			if (color == "BLUE") {
-				GUI_Cars[i].setPrimaryColor(Color.BLUE);
+				car.setPrimaryColor(Color.BLUE);
 			}
 			if (color == "YELLOW") {
-				GUI_Cars[i].setPrimaryColor(Color.YELLOW);
+				car.setPrimaryColor(Color.YELLOW);
 			}
-			GUI_Players[i] = new GUI_Player(Players[i].getName(), Players[i].getAccount().getValue(), GUI_Cars[i]);
+			GUI_Player Gui_Player = new GUI_Player(Players[i].getName(), Players[i].getAccount().getValue(), car);
+			GUI_Players[i] = Gui_Player;
 			gui.addPlayer(GUI_Players[i]);
 			gui.getFields()[Players[i].getPosition()].setCar(GUI_Players[i], true);
 		}
+		this.Players = Players;
+		this.GUI_Players = GUI_Players;
 
 	}
-	private void playerTurn(Player Pl, GUI_Player Gpl) {
+	private void playerTurn(int cp) {
 		gui.showMessage("click to roll");
 		cup.rollDiceCup();
 		gui.setDice(cup.getDice()[0].getFaceValue(), 10, 3, 3, cup.getDice()[0].getFaceValue(), 10, 3, 3);
-		gui.getFields()[Pl.getPosition()].setCar(Gpl, false);
-		Pl.setPosition(Pl.getPosition() + cup.getDice()[0].getFaceValue());
-		if (Pl.getPosition()<24)
-			gui.getFields()[Pl.getPosition()].setCar(Gpl, true);
+		gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], false);
+		Players[cp].setPosition(Players[cp].getPosition() + cup.getDice()[0].getFaceValue());
+		if (Players[cp].getPosition()<24)
+			gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], true);
 		else {
-			Pl.setPosition(Pl.getPosition()-24);
-			gui.getFields()[Pl.getPosition()].setCar(Gpl, true);
+			Players[cp].setPosition(Players[cp].getPosition()-24);
+			gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], true);
 		}
-
 	}
 
 	private GUI_Field[] generateFields() {

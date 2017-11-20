@@ -16,6 +16,5 @@ public class GameBoard {
 	public void setFields(Field[] fields) {
 		this.fields = fields;
 	}
-
-
+	
 }

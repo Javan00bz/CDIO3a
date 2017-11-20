@@ -2,8 +2,6 @@ package cdio;
 
 import java.awt.Color;
 
-import javax.print.attribute.HashPrintServiceAttributeSet;
-
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Empty;
 import gui_fields.GUI_Field;
@@ -11,9 +9,9 @@ import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
-public class Main {
+public class Game {
 
-	private GUI gui = new GUI();
+	private GUI gui = new GUI(generateFields());
 	private Player Player1;
 	private Player Player2;
 	private Player Player3;
@@ -33,10 +31,12 @@ public class Main {
 	private DiceCup cup = new DiceCup(1);
 	private int amountOfPlayers;
 	public static void main(String[] args) {
-		new Main().playGame();
+		new Game().playGame();
 	}
 
 	private void playGame(){
+
+
 		startGame();
 		for(int i = 0; i<amountOfPlayers; i++) {
 			playerTurn(Players[i], GUI_Players[i]);
@@ -44,7 +44,7 @@ public class Main {
 				i=-1;}
 	}
 
-	public void startGame() {
+	private void startGame() {
 		gui.showMessage("Welcome");
 		amountOfPlayers = gui.getUserInteger("How many players are you", 2, 4);
 		switch (amountOfPlayers) {
@@ -59,19 +59,32 @@ public class Main {
 		int j = 0;
 		for(int i=0; i < amountOfPlayers; i++) {
 			j++;
-			String playerName = gui.getUserString("Player " + j + " Enter your name" );
+			String playerName = gui.getUserString("Player " + j + ", enter your name" );
 			Players[i] = new Player(playerName, startingMoney, 0);
-			GUI_Cars[i] = new GUI_Car(); 
+			String color = gui.getUserButtonPressed("Player " + j + ", choose the colour of your car", "RED", "GREEN", "BLUE", "YELLOW");
+			GUI_Cars[i] = new GUI_Car();
+			if (color == "RED") {
+				GUI_Cars[i].setPrimaryColor(Color.RED);
+			}
+			if (color == "GREEN") {
+				GUI_Cars[i].setPrimaryColor(Color.GREEN);
+			}
+			if (color == "BLUE") {
+				GUI_Cars[i].setPrimaryColor(Color.BLUE);
+			}
+			if (color == "YELLOW") {
+				GUI_Cars[i].setPrimaryColor(Color.YELLOW);
+			}
 			GUI_Players[i] = new GUI_Player(Players[i].getName(), Players[i].getAccount().getValue(), GUI_Cars[i]);
 			gui.addPlayer(GUI_Players[i]);
 			gui.getFields()[Players[i].getPosition()].setCar(GUI_Players[i], true);
 		}
 
 	}
-	public void playerTurn(Player Pl, GUI_Player Gpl) {
+	private void playerTurn(Player Pl, GUI_Player Gpl) {
 		gui.showMessage("click to roll");
 		cup.rollDiceCup();
-		gui.setDice(cup.getDice()[0].getFaceValue(), 4, 4, 10, cup.getDice()[0].getFaceValue(), 4, 4, 10);
+		gui.setDice(cup.getDice()[0].getFaceValue(), 10, 3, 3, cup.getDice()[0].getFaceValue(), 10, 3, 3);
 		gui.getFields()[Pl.getPosition()].setCar(Gpl, false);
 		Pl.setPosition(Pl.getPosition() + cup.getDice()[0].getFaceValue());
 		if (Pl.getPosition()<24)
@@ -83,22 +96,20 @@ public class Main {
 
 	}
 
-	private void initializeGUI() {
+	private GUI_Field[] generateFields() {
+		String[] fieldText = Translater.file("file1.txt");
+		String[] fieldSubtext = Translater.file("file2.txt");
+		String[] fieldRent = Translater.file("file3.txt");
 
-
-		GUI_Field [] fields = new GUI_Field[40];
-
-		for (int i = 0; i < 25; i++) {
-			fields[i] = new GUI_Street();
-			fields[i].setTitle("title1");
+		GUI_Field[] fields = new GUI_Field[24];
+		for (int i = 0; i < fields.length; i++) {
+			GUI_Street gui_street = new GUI_Street();
+			gui_street.setTitle(fieldText[i]);
+			gui_street.setSubText(fieldSubtext[i]);
+			gui_street.setRent(fieldRent[i]);
+			fields[i] = gui_street;
 		}
-		// Lav tomme felter som ikke skal bruges
-		for (int i = 25; i < fields.length; i++) {
-			fields[i] = new GUI_Empty();
-
-		}
-
-
+		return fields;
 	}
 
 }

@@ -6,12 +6,12 @@ import cdio.Player;
 
 public class StartField extends Field {
 	
-	int addmoney = 2;
+	int startmoney = 2;
 	boolean buyable = false;
 
 	public StartField(String nameOfField, int fieldNumber, String fieldType, boolean buyable) {
 		super(nameOfField, fieldNumber, fieldType, buyable);
-		this.addmoney = addmoney;
+		this.startmoney = startmoney;
 	}
 
 	public boolean getStartfield() {
@@ -23,7 +23,7 @@ public class StartField extends Field {
 	}
 	
 	public void start(Player player) {
-		player.getAccount().deposit(addmoney);
+		player.getAccount().deposit(startmoney);
 	}
 
 }

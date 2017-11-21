@@ -32,8 +32,9 @@ public class Game {
 	}
 
 	private void startGame() {
-		gui.showMessage("Welcome");
-		amountOfPlayers = gui.getUserInteger("How many players are you", 2, 4);
+		String[] guiMessages = Translater.file("file4.txt");
+		gui.showMessage(guiMessages[0]);
+		amountOfPlayers = gui.getUserInteger(guiMessages[1], 2, 4);
 		switch (amountOfPlayers) {
 		case 2: startingMoney = 20;
 		break;
@@ -48,21 +49,21 @@ public class Game {
 		int j = 0;
 		for(int i=0; i < amountOfPlayers; i++) {
 			j++;
-			String playerName = gui.getUserString("Player " + j + ", enter your name" );
+			String playerName = gui.getUserString(guiMessages[2] + j + guiMessages[3] );
 			Player player = new Player(playerName, startingMoney, 0);
 			Players[i] = player;
-			String color = gui.getUserButtonPressed("Player " + j + ", choose the colour of your car", "RED", "GREEN", "BLUE", "YELLOW");
+			String color = gui.getUserButtonPressed(guiMessages[2] + j + guiMessages[4], guiMessages[5], guiMessages[6], guiMessages[7], guiMessages[8]);
 			GUI_Car car = new GUI_Car();
-			if (color == "RED") {
+			if (color == guiMessages[5]) {
 				car.setPrimaryColor(Color.RED);
 			}
-			if (color == "GREEN") {
+			if (color == guiMessages[6]) {
 				car.setPrimaryColor(Color.GREEN);
 			}
-			if (color == "BLUE") {
+			if (color == guiMessages[7]) {
 				car.setPrimaryColor(Color.BLUE);
 			}
-			if (color == "YELLOW") {
+			if (color == guiMessages[8]) {
 				car.setPrimaryColor(Color.YELLOW);
 			}
 			GUI_Player Gui_Player = new GUI_Player(Players[i].getName(), Players[i].getAccount().getValue(), car);
@@ -92,6 +93,7 @@ public class Game {
 		String[] fieldText = Translater.file("file1.txt");
 		String[] fieldSubtext = Translater.file("file2.txt");
 		String[] fieldRent = Translater.file("file3.txt");
+		
 
 		GUI_Field[] fields = new GUI_Field[24];
 		for (int i = 0; i < fields.length; i++) {

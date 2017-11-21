@@ -1,8 +1,10 @@
 Welcome
-How many player are you?
+How many players are you? (2-4)
 Player
 , choose your name
+, choose the color of your car
 RED
 GREEN
 BLUE
 YELLOW
+Click to roll

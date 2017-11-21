@@ -87,7 +87,8 @@ public class Game {
 			gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], true);
 		else {
 			Players[cp].setPosition(Players[cp].getPosition()-24);
-			
+			Players[cp].getAccount().deposit(2);
+			GUI_Players[cp].setBalance(Players[cp].getAccount().getValue());
 			gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], true);
 		}
 	}

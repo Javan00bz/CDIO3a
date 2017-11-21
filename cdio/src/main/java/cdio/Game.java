@@ -93,8 +93,8 @@ public class Game {
 	}
 
 	private GUI_Field[] generateFields() {
-		String[] fieldText = Translater.file("Field.txt");
-		String[] fieldSubtext = Translater.file("Fieldsubext.txt");
+		String[] fieldText = Translater.file("Fields.txt");
+		String[] fieldSubtext = Translater.file("Fieldsubtext.txt");
 		String[] fieldRent = Translater.file("Rent.txt");
 		
 

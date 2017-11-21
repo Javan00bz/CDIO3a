@@ -2,6 +2,8 @@ package cdio;
 
 import java.awt.Color;
 import cdio.StartField;
+import cdio.Player;
+import cdio.StartField;
 
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Empty;
@@ -92,8 +94,8 @@ public class Game {
 
 	private GUI_Field[] generateFields() {
 		String[] fieldText = Translater.file("Field.txt");
-		String[] fieldSubtext = Translater.file("file2.txt");
-		String[] fieldRent = Translater.file("file3.txt");
+		String[] fieldSubtext = Translater.file("Fieldsubext.txt");
+		String[] fieldRent = Translater.file("Rent.txt");
 		
 
 		GUI_Field[] fields = new GUI_Field[24];

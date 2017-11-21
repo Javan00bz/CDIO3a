@@ -23,16 +23,15 @@ public class Game {
 	}
 
 	private void playGame(){
-
-		startGame();
+		String[] guiMessages = Translater.file("file4.txt");
+		startGame(guiMessages);
 		for(int i = 0; i<amountOfPlayers; i++) {
-			playerTurn(i);
+			playerTurn(i, guiMessages);
 			if (i == amountOfPlayers-1)
 				i=-1;}
 	}
 
-	private void startGame() {
-		String[] guiMessages = Translater.file("file4.txt");
+	private void startGame(String[] guiMessages) {
 		gui.showMessage(guiMessages[0]);
 		amountOfPlayers = gui.getUserInteger(guiMessages[1], 2, 4);
 		switch (amountOfPlayers) {
@@ -75,8 +74,8 @@ public class Game {
 		this.GUI_Players = GUI_Players;
 
 	}
-	private void playerTurn(int cp) {
-		gui.showMessage("click to roll");
+	private void playerTurn(int cp, String[] guiMessage) {
+		gui.showMessage( guiMessage[9]);
 		cup.rollDiceCup();
 		gui.setDice(cup.getDice()[0].getFaceValue(), 10, 3, 3, cup.getDice()[0].getFaceValue(), 10, 3, 3);
 		gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], false);

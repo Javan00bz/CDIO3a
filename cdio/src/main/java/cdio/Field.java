@@ -45,6 +45,10 @@ public class Field {
 	public void setFieldType(String fieldType) {
 		this.fieldType = fieldType;
 	}
+	
+	public void landOnField() {
+		System.out.println("No action has been specified for this field");
+	}
 
 
 }

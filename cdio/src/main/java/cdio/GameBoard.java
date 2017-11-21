@@ -1,4 +1,6 @@
 package cdio;
+import javax.naming.spi.Resolver;
+
 import cdio.Field;
 
 public class GameBoard {
@@ -15,6 +17,10 @@ public class GameBoard {
 
 	public void setFields(Field[] fields) {
 		this.fields = fields;
+	}
+	
+	public void resolveField(Field f) {
+		f.landOnField();
 	}
 	
 }

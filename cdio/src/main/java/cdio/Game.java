@@ -1,6 +1,7 @@
 package cdio;
 
 import java.awt.Color;
+import cdio.StartField;
 
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Empty;
@@ -23,7 +24,7 @@ public class Game {
 	}
 
 	private void playGame(){
-		String[] guiMessages = Translater.file("file4.txt");
+		String[] guiMessages = Translater.file("Gamefunctions.txt");
 		startGame(guiMessages);
 		for(int i = 0; i<amountOfPlayers; i++) {
 			playerTurn(i, guiMessages);
@@ -84,12 +85,13 @@ public class Game {
 			gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], true);
 		else {
 			Players[cp].setPosition(Players[cp].getPosition()-24);
+			
 			gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], true);
 		}
 	}
 
 	private GUI_Field[] generateFields() {
-		String[] fieldText = Translater.file("file1.txt");
+		String[] fieldText = Translater.file("Field.txt");
 		String[] fieldSubtext = Translater.file("file2.txt");
 		String[] fieldRent = Translater.file("file3.txt");
 		

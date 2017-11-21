@@ -7,8 +7,8 @@ public class RideField extends Field {
 	int price;
 	int rent;
 
-	public RideField(String nameOfField, int fieldNumber, String fieldType, int price, int rent) {
-		super(nameOfField, fieldNumber, fieldType);
+	public RideField(String nameOfField, int fieldNumber, String fieldType, int price, int rent, boolean buyable) {
+		super(nameOfField, fieldNumber, fieldType, buyable);
 		this.price = price;
 		this.rent = rent;
 	}

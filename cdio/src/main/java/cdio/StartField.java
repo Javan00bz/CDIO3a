@@ -1,6 +1,8 @@
 package cdio;
 
 import cdio.Field;
+import cdio.Account;
+import cdio.Player;
 
 public class StartField extends Field {
 	
@@ -12,6 +14,16 @@ public class StartField extends Field {
 		this.addmoney = addmoney;
 	}
 
+	public boolean getStartfield() {
+		return buyable;
+	}
 	
+	public void setStartfield(boolean buyable) {
+		this.buyable = buyable;
+	}
+	
+	public void start(Player player) {
+		player.getAccount().deposit(addmoney);
+	}
 
 }

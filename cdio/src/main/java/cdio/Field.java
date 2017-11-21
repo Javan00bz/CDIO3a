@@ -4,11 +4,13 @@ public class Field {
 	String nameOfField;
 	int fieldNumber;
 	String fieldType;
+	boolean buyable;
 
-	public Field(String nameOfField, int fieldNumber, String fieldType) {
+	public Field(String nameOfField, int fieldNumber, String fieldType, boolean buyable) {
 		this.nameOfField = nameOfField;
 		this.fieldNumber = fieldNumber;
 		this.fieldType = fieldType;
+		this.buyable = buyable;
 	}
 
 	public String getNameOfField() {
@@ -23,6 +25,15 @@ public class Field {
 		return fieldNumber;
 	}
 
+	public boolean getBuyable() {
+		return buyable;
+	}
+	
+	public void setBuyable(boolean buyable) {
+		this.buyable = buyable;
+		
+	}
+	
 	public void setFieldNumber(int fieldNumber) {
 		this.fieldNumber = fieldNumber;
 	}

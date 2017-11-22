@@ -78,9 +78,9 @@ public class Game {
 
 	}
 	private void playerTurn(int cp, String[] guiMessage) {
-		gui.showMessage( guiMessage[9]);
+		gui.showMessage(guiMessage[9]);
 		cup.rollDiceCup();
-		gui.setDice(cup.getDice()[0].getFaceValue(), 10, 3, 3, cup.getDice()[0].getFaceValue(), 10, 3, 3);
+		gui.setDie(cup.getDice()[0].getFaceValue());
 		gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], false);
 		Players[cp].setPosition(Players[cp].getPosition() + cup.getDice()[0].getFaceValue());
 		if (Players[cp].getPosition()<24)

@@ -1,16 +1,19 @@
 package cdio;
 
 import cdio.Field;
+import gui_fields.GUI_Player;
+import gui_fields.GUI_Street;
+import gui_main.GUI;
 
 public class RideField extends Field {
 
 	int price;
-	int rent;
+	Player owner;
 
-	public RideField(String nameOfField, int fieldNumber, String fieldType, int price, int rent, boolean buyable) {
-		super(nameOfField, fieldNumber, fieldType, buyable);
+	public RideField(String nameOfField, int price, Player Owner) {
+		super(nameOfField);
 		this.price = price;
-		this.rent = rent;
+		this.owner = owner;
 	}
 
 	public int getPrice() {
@@ -21,12 +24,28 @@ public class RideField extends Field {
 		this.price = price;
 	}
 
-	public int getRent() {
-		return rent;
+
+	public Player getOwner() {
+		return owner;
 	}
 
-	public void setRent(int rent) {
-		this.rent = rent;
+	public void setOwner(Player owner) {
+		this.owner = owner;
 	}
 
+	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
+		if (owner == null) {
+			String userSelection = gui.getUserSelection("Do you want to buy this field", "YES", "NO");
+			if (userSelection == "YES") {
+				street.setBorder(Gpl.getCar().getPrimaryColor());
+				street.setOwnerName(pl.getName());
+				pl.getAccount().withdraw(getPrice());
+				setOwner(pl);
+			}
+		}
+		else {
+		pl.getAccount().withdraw(getPrice());
+		getOwner().getAccount().deposit(getPrice());
+		}
+	}
 }

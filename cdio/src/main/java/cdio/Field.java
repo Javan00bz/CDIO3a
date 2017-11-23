@@ -1,16 +1,15 @@
 package cdio;
 
+import gui_fields.GUI_Player;
+import gui_fields.GUI_Street;
+import gui_main.GUI;
+
 public class Field {
 	String nameOfField;
-	int fieldNumber;
-	String fieldType;
-	boolean buyable;
 
-	public Field(String nameOfField, int fieldNumber, String fieldType, boolean buyable) {
+	public Field(String nameOfField) {
 		this.nameOfField = nameOfField;
-		this.fieldNumber = fieldNumber;
-		this.fieldType = fieldType;
-		this.buyable = buyable;
+
 	}
 
 	public String getNameOfField() {
@@ -21,32 +20,7 @@ public class Field {
 		this.nameOfField = nameOfField;
 	}
 
-	public int getFieldNumber() {
-		return fieldNumber;
-	}
-
-	public boolean getBuyable() {
-		return buyable;
-	}
-	
-	public void setBuyable(boolean buyable) {
-		this.buyable = buyable;
-		
-	}
-	
-	public void setFieldNumber(int fieldNumber) {
-		this.fieldNumber = fieldNumber;
-	}
-
-	public String getFieldType() {
-		return fieldType;
-	}
-
-	public void setFieldType(String fieldType) {
-		this.fieldType = fieldType;
-	}
-	
-	public void landOnField() {
+	public void landOnField (GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
 		System.out.println("No action has been specified for this field");
 	}
 

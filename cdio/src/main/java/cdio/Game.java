@@ -15,26 +15,27 @@ import gui_main.GUI;
 
 public class Game {
 
-	private GUI gui = new GUI(generateFields());
+	public GUI gui = new GUI(generateFields());
+	private GameBoard board = new GameBoard(GameBoard.generateGameFields());
 	private Player[] Players;
 	private GUI_Player[] GUI_Players;
 	private int startingMoney;
 	private DiceCup cup = new DiceCup(1);
 	private int amountOfPlayers;
+	String[] guiMessages = Translater.file("Gamefunctions.txt");
 	public static void main(String[] args) {
 		new Game().playGame();
 	}
 
 	private void playGame(){
-		String[] guiMessages = Translater.file("Gamefunctions.txt");
-		startGame(guiMessages);
+		startGame();
 		for(int i = 0; i<amountOfPlayers; i++) {
-			playerTurn(i, guiMessages);
+			playerTurn(i);
 			if (i == amountOfPlayers-1)
 				i=-1;}
 	}
 
-	private void startGame(String[] guiMessages) {
+	private void startGame() {
 		gui.showMessage(guiMessages[0]);
 		amountOfPlayers = gui.getUserInteger(guiMessages[1], 2, 4);
 		switch (amountOfPlayers) {
@@ -77,8 +78,8 @@ public class Game {
 		this.GUI_Players = GUI_Players;
 
 	}
-	private void playerTurn(int cp, String[] guiMessage) {
-		gui.showMessage(guiMessage[9]);
+	private void playerTurn(int cp) {
+		gui.showMessage(guiMessages[9]);
 		cup.rollDiceCup();
 		gui.setDie(cup.getDice()[0].getFaceValue());
 		gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], false);
@@ -91,6 +92,10 @@ public class Game {
 			GUI_Players[cp].setBalance(Players[cp].getAccount().getValue());
 			gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], true);
 		}
+		board.resolveField(board.getFields()[Players[cp].getPosition()], gui, (GUI_Street) gui.getFields()[Players[cp].getPosition()], Players[cp], GUI_Players[cp]);
+			for (int i = 0; i < Players.length; i++) {
+				GUI_Players[i].setBalance(Players[i].getAccount().getValue());
+			}
 	}
 
 	private GUI_Field[] generateFields() {

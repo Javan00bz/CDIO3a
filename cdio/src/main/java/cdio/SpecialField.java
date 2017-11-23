@@ -2,12 +2,12 @@ package cdio;
 
 import gui_main.GUI;
 
-public class SpecielField extends Field {
+public class SpecialField extends Field {
 
 	int fee;
 	
-	public SpecielField(String nameOfField, int fieldNumber, String fieldType, boolean buyable, int fee) {
-		super(nameOfField, fieldNumber, fieldType, buyable);
+	public SpecialField(String nameOfField, int fee) {
+		super(nameOfField);
 		this.fee=fee;
 	
 	}

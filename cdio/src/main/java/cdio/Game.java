@@ -21,6 +21,7 @@ public class Game {
 	private DiceCup cup = new DiceCup(1);
 	private int amountOfPlayers;
 	String[] guiMessages = Translater.file("Gamefunctions.txt");
+	private boolean winner = false;
 	public static void main(String[] args) {
 		new Game().playGame();
 	}
@@ -30,8 +31,10 @@ public class Game {
 		for(int i = 0; i<amountOfPlayers; i++) {
 			playerTurn(i);
 			if (i == amountOfPlayers-1)
-				i=-1;}
-	}
+				i=-1;
+		if (winner==true)
+			break;}
+		}
 
 	private void startGame() {
 		gui.showMessage(guiMessages[0]);
@@ -94,6 +97,10 @@ public class Game {
 			for (int i = 0; i < Players.length; i++) {
 				GUI_Players[i].setBalance(Players[i].getAccount().getValue());
 			}
+			if (Players[cp].getAccount().getValue()<=0) {
+				endGame();
+			}
+			
 	}
 
 	private GUI_Field[] generateFields() {
@@ -111,6 +118,16 @@ public class Game {
 			fields[i] = gui_street;
 		}
 		return fields;
+	}
+	
+	private void endGame() { // Når playgame loop slutter, findes vinder ved højeste værdi.
+		Player winner = new Player(null, 0, 0);
+		for (int i=0; i<Players.length; i++) {
+			if (Players[i].getAccount().getValue()>winner.getAccount().getValue());
+			winner=Players[i];
+		}
+		this.winner = true;
+		gui.showMessage("Congratulations " + winner.getName()+ " you won!");
 	}
 
 }

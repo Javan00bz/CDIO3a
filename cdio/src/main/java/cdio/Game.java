@@ -29,7 +29,7 @@ public class Game {
 	private void playGame(){
 		startGame();
 		for(int i = 0; i<amountOfPlayers; i++) {
-			playerTurn(i);
+			playerTurn(Players[i], GUI_Players[i]);
 			if (i == amountOfPlayers-1)
 				i=-1;
 		if (winner==true)
@@ -79,27 +79,29 @@ public class Game {
 		this.GUI_Players = GUI_Players;
 
 	}
-	private void playerTurn(int cp) {
+	private void playerTurn(Player p, GUI_Player gp) {
 		gui.showMessage(guiMessages[9]);
 		cup.rollDiceCup();
 		gui.setDie(cup.getDice()[0].getFaceValue());
-		gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], false);
-		Players[cp].setPosition(Players[cp].getPosition() + cup.getDice()[0].getFaceValue());
-		if (Players[cp].getPosition()<24)
-			gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], true);
+		gui.getFields()[p.getPosition()].setCar(gp, false);
+		p.setPosition(p.getPosition() + cup.getDice()[0].getFaceValue());
+		if (p.getPosition()<24)
+			gui.getFields()[p.getPosition()].setCar(gp, true);
 		else {
-			Players[cp].setPosition(Players[cp].getPosition()-24);
-			Players[cp].getAccount().deposit(2);
-			GUI_Players[cp].setBalance(Players[cp].getAccount().getValue());
-			gui.getFields()[Players[cp].getPosition()].setCar(GUI_Players[cp], true);
+			p.setPosition(p.getPosition()-24);
+			p.getAccount().deposit(2);
+			gp.setBalance(p.getAccount().getValue());
+			gui.getFields()[p.getPosition()].setCar(gp, true);
 		}
-		board.resolveField(board.getFields()[Players[cp].getPosition()], gui, (GUI_Street) gui.getFields()[Players[cp].getPosition()], Players[cp], GUI_Players[cp]);
+		board.resolveField(board.getFields()[p.getPosition()], gui, (GUI_Street) gui.getFields()[p.getPosition()], p, gp);
 			for (int i = 0; i < Players.length; i++) {
 				GUI_Players[i].setBalance(Players[i].getAccount().getValue());
 			}
-			if (Players[cp].getAccount().getValue()<=0) {
+			if (p.getAccount().getValue()<=0) {
 				endGame();
 			}
+			if(p.getPosition() == 3 && p.getPosition() == 12)
+				playerTurn(p, gp);
 			
 	}
 

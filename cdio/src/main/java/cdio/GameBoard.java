@@ -32,7 +32,7 @@ public class GameBoard {
 		fields[0] = new SpecialField(null,0);
 		fields[1] = new RideField(null, 1, null);
 		fields[2] = new RideField(null, 1, null);
-		fields[3] = new SpecialField(null, 2); //Ændres til Train senere
+		fields[3] = new SpecialField(null, 0); //ï¿½ndres til Train senere
 		fields[4] = new RideField(null, 1, null);
 		fields[5] = new RideField(null, 1, null);
 		fields[6] = new SpecialField(null, 0);
@@ -44,10 +44,10 @@ public class GameBoard {
 		fields[12] = new SpecialField(null, 0);
 		fields[13] = new RideField(null, 3, null);
 		fields[14] = new RideField(null, 3, null);
-		fields[15] = new SpecialField(null, 0); //Ændres til Train
+		fields[15] = new SpecialField(null, 0); //ï¿½ndres til Train
 		fields[16] = new RideField(null, 3, null);
 		fields[17] = new RideField(null, 3, null);
-		fields[18] = new SpecialField(null, 0); //Ændres til GotoPrison
+		fields[18] = new SpecialField(null, 0); //ï¿½ndres til GotoPrison
 		fields[19] = new RideField(null, 4, null);
 		fields[20] = new RideField(null, 4, null);
 		fields[21] = new SpecialField(null, 2);

@@ -32,7 +32,7 @@ public class GameBoard {
 		fields[0] = new SpecialField(null,0);
 		fields[1] = new RideField(null, 1, null);
 		fields[2] = new RideField(null, 1, null);
-		fields[3] = new SpecialField(null, 0); //�ndres til Train senere
+		fields[3] = new SpecialField(null, 0);
 		fields[4] = new RideField(null, 1, null);
 		fields[5] = new RideField(null, 1, null);
 		fields[6] = new SpecialField(null, 0);
@@ -57,6 +57,12 @@ public class GameBoard {
 		for(int i = 0; i < fields.length; i++)
 			fields[i].setNameOfField(fieldText[i]);
 		return fields;
+	}
+	
+	public static boolean sameOwner() {
+			
+		return false;
+		
 	}
 	
 }

@@ -35,18 +35,23 @@ public class RideField extends Field {
 	}
 
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
-		if (owner == null) {
-			String userSelection = gui.getUserSelection(guiMessages[12], guiMessages[10], guiMessages[11]);
-			if (userSelection == guiMessages[10]) {
-				street.setBorder(Gpl.getCar().getPrimaryColor());
-				street.setOwnerName(pl.getName());
-				pl.getAccount().withdraw(getPrice());
-				setOwner(pl);
-			}
-		}
-		else {
+		if (owner == null)
+				buyField(gui, street, pl, Gpl);
+		else payRent(pl);	
+	}
+	
+	public void payRent(Player pl) {
 		pl.getAccount().withdraw(getPrice());
 		getOwner().getAccount().deposit(getPrice());
+	}
+	
+	public void buyField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
+		String userSelection = gui.getUserSelection(guiMessages[12], guiMessages[10], guiMessages[11]);
+		if (userSelection == guiMessages[10]) {
+			street.setBorder(Gpl.getCar().getPrimaryColor());
+			street.setOwnerName(pl.getName());
+			pl.getAccount().withdraw(getPrice());
+			setOwner(pl);
 		}
 	}
 }

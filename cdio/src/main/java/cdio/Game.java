@@ -100,9 +100,8 @@ public class Game {
 			if (p.getAccount().getValue()<=0) {
 				endGame();
 			}
-			if(p.getPosition() == 3 && p.getPosition() == 12)
-				playerTurn(p, gp);
-			
+			if(p.getPosition() == 3 || p.getPosition() == 15)
+				playerTurn(p, gp);	
 	}
 
 	private GUI_Field[] generateFields() {

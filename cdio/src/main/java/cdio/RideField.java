@@ -9,6 +9,7 @@ public class RideField extends Field {
 
 	int price;
 	Player owner;
+	String[] guiMessages = Translater.file("Gamefunctions.txt");
 
 	public RideField(String nameOfField, int price, Player Owner) {
 		super(nameOfField);
@@ -35,8 +36,8 @@ public class RideField extends Field {
 
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
 		if (owner == null) {
-			String userSelection = gui.getUserSelection("Do you want to buy this field", "YES", "NO");
-			if (userSelection == "YES") {
+			String userSelection = gui.getUserSelection(guiMessages[12], guiMessages[10], guiMessages[11]);
+			if (userSelection == guiMessages[10]) {
 				street.setBorder(Gpl.getCar().getPrimaryColor());
 				street.setOwnerName(pl.getName());
 				pl.getAccount().withdraw(getPrice());

@@ -8,3 +8,6 @@ GREEN
 BLUE
 YELLOW
 Click to roll
+YES
+NO
+Do you want to buy this field", "YES", "NO"

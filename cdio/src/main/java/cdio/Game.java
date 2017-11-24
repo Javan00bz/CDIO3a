@@ -80,6 +80,8 @@ public class Game {
 
 	}
 	private void playerTurn(Player p, GUI_Player gp) {
+		//if (p.getPrison() == true) { -- lav slutningen på prison-metoden 
+		//gui.showMessage(guiMessages[15]);
 		gui.showMessage("" + p.getName() + guiMessages[9]);
 		cup.rollDiceCup();
 		gui.setDie(cup.getDice()[0].getFaceValue());
@@ -102,8 +104,8 @@ public class Game {
 			}
 			if(p.getPosition() == 3 || p.getPosition() == 15)
 				playerTurn(p, gp);	
-			
-	}
+		}
+	
 
 	private GUI_Field[] generateFields() {
 		String[] fieldText = Translater.file("Fields.txt");

@@ -80,7 +80,7 @@ public class Game {
 
 	}
 	private void playerTurn(Player p, GUI_Player gp) {
-		gui.showMessage(guiMessages[9]);
+		gui.showMessage(" " + p.getName() + guiMessages[9]);
 		cup.rollDiceCup();
 		gui.setDie(cup.getDice()[0].getFaceValue());
 		gui.getFields()[p.getPosition()].setCar(gp, false);
@@ -128,7 +128,7 @@ public class Game {
 			winner=Players[i];
 		}
 		this.winner = true;
-		gui.showMessage("Congratulations " + winner.getName()+ " you won!");
+		gui.showMessage(guiMessages[13] + winner.getName()+ guiMessages[14]);
 	}
 
 }

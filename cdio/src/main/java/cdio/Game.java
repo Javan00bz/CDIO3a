@@ -1,9 +1,7 @@
 package cdio;
 
 import java.awt.Color;
-import cdio.StartField;
 import cdio.Player;
-import cdio.StartField;
 
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Empty;

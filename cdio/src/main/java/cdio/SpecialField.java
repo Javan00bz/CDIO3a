@@ -1,5 +1,7 @@
 package cdio;
 
+import gui_fields.GUI_Player;
+import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 public class SpecialField extends Field {
@@ -20,8 +22,7 @@ public class SpecialField extends Field {
 		this.fee = fee;
 	}
 
-	public void landOnField (Player pl, GUI gui) {
-		gui.showMessage("Dolphin");
+	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
 		pl.getAccount().withdraw(getFee());
 	}	
 }

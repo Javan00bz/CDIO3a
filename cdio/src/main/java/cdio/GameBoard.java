@@ -47,7 +47,7 @@ public class GameBoard {
 		fields[15] = new SpecialField(null, 0); //�ndres til Train
 		fields[16] = new RideField(null, 3, null);
 		fields[17] = new RideField(null, 3, null);
-		fields[18] = new SpecialField(null, 0); //�ndres til GotoPrison
+		fields[18] = new PrisonField(null, 0); //
 		fields[19] = new RideField(null, 4, null);
 		fields[20] = new RideField(null, 4, null);
 		fields[21] = new SpecialField(null, 2);

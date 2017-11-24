@@ -80,7 +80,7 @@ public class Game {
 
 	}
 	private void playerTurn(Player p, GUI_Player gp) {
-		gui.showMessage(" " + p.getName() + guiMessages[9]);
+		gui.showMessage("" + p.getName() + guiMessages[9]);
 		cup.rollDiceCup();
 		gui.setDie(cup.getDice()[0].getFaceValue());
 		gui.getFields()[p.getPosition()].setCar(gp, false);
@@ -102,6 +102,7 @@ public class Game {
 			}
 			if(p.getPosition() == 3 || p.getPosition() == 15)
 				playerTurn(p, gp);	
+			
 	}
 
 	private GUI_Field[] generateFields() {

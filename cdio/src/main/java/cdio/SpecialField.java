@@ -8,8 +8,8 @@ public class SpecialField extends Field {
 
 	int fee;
 	
-	public SpecialField(String nameOfField, int fee) {
-		super(nameOfField);
+	public SpecialField(String nameOfField, int fieldNumber, int fee) {
+		super(nameOfField, fieldNumber);
 		this.fee=fee;
 	
 	}

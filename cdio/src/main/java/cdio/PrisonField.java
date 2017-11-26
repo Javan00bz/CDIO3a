@@ -6,10 +6,10 @@ import gui_main.GUI;
 
 public class PrisonField extends Field {
 
-	int fee = -3;
+	int fee = 3;
 
-	public PrisonField(String nameOfField, int fee) {
-		super(nameOfField);
+	public PrisonField(String nameOfField, int fieldNumber, int fee) {
+		super(nameOfField, fieldNumber);
 		this.fee=fee;
 
 	}
@@ -23,7 +23,7 @@ public class PrisonField extends Field {
 	}
 
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
-		pl.setPrison(true);
+		pl.setPrison(true); //prison
 		pl.getAccount().withdraw(getFee());
 		Gpl.setBalance(pl.getAccount().getValue());
 		gui.getFields()[pl.getPosition()].setCar(Gpl, false);

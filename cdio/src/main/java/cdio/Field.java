@@ -4,7 +4,7 @@ import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
-public class Field {
+public abstract class Field {
 	protected String nameOfField;
 	protected int fieldNumber;
 	String[] guiMessages = Translater.file("Gamefunctions.txt");

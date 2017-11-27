@@ -7,7 +7,6 @@ import gui_main.GUI;
 public class Field {
 	protected String nameOfField;
 	protected int fieldNumber;
-
 	public Field(String nameOfField, int fieldNumber) {
 		this.nameOfField = nameOfField;
 		this.fieldNumber = fieldNumber;
@@ -21,9 +20,10 @@ public class Field {
 	public void setNameOfField(String nameOfField) {
 		this.nameOfField = nameOfField;
 	}
-
+	
 	public void landOnField (GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
-		System.out.println("No action has been specified for this field");
+		String[] guiMessages = Translater.file("Gamefunctions.txt");
+		System.out.println(guiMessages[16]);
 	}
 	
 

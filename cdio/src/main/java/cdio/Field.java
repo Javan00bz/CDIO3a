@@ -5,8 +5,8 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 public class Field {
-	String nameOfField;
-	int fieldNumber;
+	protected String nameOfField;
+	protected int fieldNumber;
 
 	public Field(String nameOfField, int fieldNumber) {
 		this.nameOfField = nameOfField;

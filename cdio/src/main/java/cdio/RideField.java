@@ -41,7 +41,7 @@ public class RideField extends Field {
 	}
 
 	public void payRent(Player pl) {
-		if (GameBoard.sameOwner(GameBoard.generateGameFields(), getFieldNumber() ) == true) {
+		if (GameBoard.sameOwner(Game.getBoard(), getFieldNumber() ) == true) {
 			int price = getPrice() * 2;
 			pl.getAccount().withdraw(price);
 			getOwner().getAccount().deposit(price);

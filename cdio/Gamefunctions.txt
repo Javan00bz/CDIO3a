@@ -1,6 +1,6 @@
 Welcome
 How many players are you? (2-4)
-Player
+Player 
 , choose your name
 , choose the color of your car
 RED

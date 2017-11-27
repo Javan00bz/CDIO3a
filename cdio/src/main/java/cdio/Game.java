@@ -14,7 +14,7 @@ import gui_main.GUI;
 public class Game {
 
 	public GUI gui = new GUI(generateFields());
-	private GameBoard board = new GameBoard(GameBoard.generateGameFields());
+	private static GameBoard board = new GameBoard(GameBoard.generateGameFields());
 	private Player[] Players;
 	private GUI_Player[] GUI_Players;
 	private int startingMoney;
@@ -32,9 +32,9 @@ public class Game {
 			playerTurn(Players[i], GUI_Players[i]);
 			if (i == amountOfPlayers-1)
 				i=-1;
-		if (winner==true)
-			break;}
-		}
+			if (winner==true)
+				break;}
+	}
 
 	private void startGame() {
 		gui.showMessage(guiMessages[0]);
@@ -54,6 +54,13 @@ public class Game {
 		for(int i=0; i < amountOfPlayers; i++) {
 			j++;
 			String playerName = gui.getUserString(guiMessages[2] + j + guiMessages[3] );
+			for(int k=i-1; k>=0; k--) {
+				while(Players[k].getName().equals(playerName))
+				{
+					playerName = gui.getUserString("You cant have the same name as another player. Please try again");
+					k=i-1;
+				}
+			}
 			Player player = new Player(playerName, startingMoney, 0);
 			Players[i] = player;
 			String color = gui.getUserButtonPressed(guiMessages[2] + j + guiMessages[4], guiMessages[5], guiMessages[6], guiMessages[7], guiMessages[8]);
@@ -95,23 +102,23 @@ public class Game {
 			gp.setBalance(p.getAccount().getValue());
 			gui.getFields()[p.getPosition()].setCar(gp, true);
 		}
-		board.resolveField(board.getFields()[p.getPosition()], gui, (GUI_Street) gui.getFields()[p.getPosition()], p, gp);
-			for (int i = 0; i < Players.length; i++) {
-				GUI_Players[i].setBalance(Players[i].getAccount().getValue());
-			}
-			if (p.getAccount().getValue()<=0) {
-				endGame();
-			}
-			if(p.getPosition() == 3 || p.getPosition() == 15)
-				playerTurn(p, gp);	
+		getBoard().resolveField(getBoard().getFields()[p.getPosition()], gui, (GUI_Street) gui.getFields()[p.getPosition()], p, gp);
+		for (int i = 0; i < Players.length; i++) {
+			GUI_Players[i].setBalance(Players[i].getAccount().getValue());
 		}
-	
+		if (p.getAccount().getValue()<=0) {
+			endGame();
+		}
+		if(p.getPosition() == 3 || p.getPosition() == 15)
+			playerTurn(p, gp);	
+	}
+
 
 	private GUI_Field[] generateFields() {
 		String[] fieldText = Translater.file("Fields.txt");
 		String[] fieldSubtext = Translater.file("Fieldsubtext.txt");
 		String[] fieldRent = Translater.file("Rent.txt");
-		
+
 
 		GUI_Field[] fields = new GUI_Field[24];
 		for (int i = 0; i < fields.length; i++) {
@@ -123,7 +130,7 @@ public class Game {
 		}
 		return fields;
 	}
-	
+
 	private void endGame() { // Når playgame loop slutter, findes vinder ved højeste værdi.
 		Player winner = new Player(null, 0, 0);
 		for (int i=0; i<Players.length; i++) {
@@ -132,6 +139,14 @@ public class Game {
 		}
 		this.winner = true;
 		gui.showMessage(guiMessages[13] + winner.getName()+ guiMessages[14]);
+	}
+
+	public static GameBoard getBoard() {
+		return board;
+	}
+
+	public static void setBoard(GameBoard board) {
+		Game.board = board;
 	}
 
 }

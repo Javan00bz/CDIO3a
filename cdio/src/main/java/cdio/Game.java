@@ -143,7 +143,7 @@ public class Game {
 			gui_street.setTitle(fieldText[i]);
 			gui_street.setSubText(fieldSubtext[i]);
 			gui_street.setRent(fieldRent[i]);
-			
+			gui_street.setDescription(fieldText[i]);
 			fields[i] = gui_street;
 		}
 		fields[1].setBackGroundColor(Color.RED);

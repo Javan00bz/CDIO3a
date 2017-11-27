@@ -7,6 +7,8 @@ import gui_main.GUI;
 public class Field {
 	protected String nameOfField;
 	protected int fieldNumber;
+	String[] guiMessages = Translater.file("Gamefunctions.txt");
+	
 	public Field(String nameOfField, int fieldNumber) {
 		this.nameOfField = nameOfField;
 		this.fieldNumber = fieldNumber;
@@ -22,7 +24,6 @@ public class Field {
 	}
 	
 	public void landOnField (GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
-		String[] guiMessages = Translater.file("Gamefunctions.txt");
 		System.out.println(guiMessages[16]);
 	}
 	

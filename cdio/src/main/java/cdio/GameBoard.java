@@ -61,13 +61,15 @@ public class GameBoard {
 	}
 
 	public static boolean sameOwner(GameBoard board, int field) {
-	if (board.getFields()[field+1].getOwner() != null) {
-		if (board.getFields()[field+1].getOwner().equals(board.getFields()[field].getOwner()))
-			return true;}
-	else if (board.getFields()[field-1].getOwner() != null) {
-		if (board.getFields()[field-1].getOwner().equals(board.getFields()[field].getOwner()))
-			return true;}
-	return false;
+		if (board.getFields()[field+1].getOwner() != null) {
+			if (board.getFields()[field+1].getOwner().equals(board.getFields()[field].getOwner()))
+				return true;
+		}
+		else if (board.getFields()[field-1].getOwner() != null) {
+			if (board.getFields()[field-1].getOwner().equals(board.getFields()[field].getOwner()))
+				return true;
+		}
+		return false;
 
 	}
 

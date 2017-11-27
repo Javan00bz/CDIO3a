@@ -143,8 +143,25 @@ public class Game {
 			gui_street.setTitle(fieldText[i]);
 			gui_street.setSubText(fieldSubtext[i]);
 			gui_street.setRent(fieldRent[i]);
+			
 			fields[i] = gui_street;
 		}
+		fields[1].setBackGroundColor(Color.RED);
+		fields[2].setBackGroundColor(Color.RED);
+		fields[4].setBackGroundColor(Color.YELLOW);
+		fields[5].setBackGroundColor(Color.YELLOW);
+		fields[7].setBackGroundColor(Color.GREEN);
+		fields[8].setBackGroundColor(Color.GREEN);
+		fields[10].setBackGroundColor(Color.BLUE);
+		fields[11].setBackGroundColor(Color.BLUE);
+		fields[13].setBackGroundColor(Color.WHITE);
+		fields[14].setBackGroundColor(Color.WHITE);
+		fields[16].setBackGroundColor(Color.DARK_GRAY);
+		fields[17].setBackGroundColor(Color.DARK_GRAY);
+		fields[19].setBackGroundColor(Color.MAGENTA);
+		fields[20].setBackGroundColor(Color.MAGENTA);
+		fields[22].setBackGroundColor(Color.ORANGE);
+		fields[23].setBackGroundColor(Color.ORANGE);
 		return fields;
 	}
 

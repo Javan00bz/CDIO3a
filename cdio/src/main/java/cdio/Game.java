@@ -32,9 +32,9 @@ public class Game {
 			playerTurn(Players[i], GUI_Players[i]);
 			if (i == amountOfPlayers-1)
 				i=-1;
-		if (winner==true)
-			break;}
-		}
+			if (winner==true)
+				break;}
+	}
 
 	private void startGame() {
 		gui.showMessage(guiMessages[0]);
@@ -80,8 +80,7 @@ public class Game {
 
 	}
 	private void playerTurn(Player p, GUI_Player gp) {
-		//if (p.getPrison() == true) { -- lav slutningen på prison-metoden 
-		//gui.showMessage(guiMessages[15]);
+
 		gui.showMessage("" + p.getName() + guiMessages[9]);
 		cup.rollDiceCup();
 		gui.setDie(cup.getDice()[0].getFaceValue());
@@ -96,22 +95,23 @@ public class Game {
 			gui.getFields()[p.getPosition()].setCar(gp, true);
 		}
 		board.resolveField(board.getFields()[p.getPosition()], gui, (GUI_Street) gui.getFields()[p.getPosition()], p, gp);
-			for (int i = 0; i < Players.length; i++) {
-				GUI_Players[i].setBalance(Players[i].getAccount().getValue());
-			}
-			if (p.getAccount().getValue()<=0) {
-				endGame();
-			}
-			if(p.getPosition() == 3 || p.getPosition() == 15)
-				playerTurn(p, gp);	
+		for (int i = 0; i < Players.length; i++) {
+			GUI_Players[i].setBalance(Players[i].getAccount().getValue());
 		}
-	
+		if (p.getAccount().getValue()<=0) {
+			endGame();
+		}
+		if(p.getPosition() == 3 || p.getPosition() == 15)
+			playerTurn(p, gp);
+	}
+
+
 
 	private GUI_Field[] generateFields() {
 		String[] fieldText = Translater.file("Fields.txt");
 		String[] fieldSubtext = Translater.file("Fieldsubtext.txt");
 		String[] fieldRent = Translater.file("Rent.txt");
-		
+
 
 		GUI_Field[] fields = new GUI_Field[24];
 		for (int i = 0; i < fields.length; i++) {
@@ -123,7 +123,7 @@ public class Game {
 		}
 		return fields;
 	}
-	
+
 	private void endGame() { // Når playgame loop slutter, findes vinder ved højeste værdi.
 		Player winner = new Player(null, 0, 0);
 		for (int i=0; i<Players.length; i++) {

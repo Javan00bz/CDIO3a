@@ -8,9 +8,7 @@ public class Player {
 	private String name;
 	private int position;
 	private Account account;
-	private int firstRoll;
-	private boolean prison = false;
-	
+	//private int firstRoll;
 	
 	public Player(String name, int balance, int position) {
 		this.name = name;
@@ -40,14 +38,6 @@ public class Player {
 
 	public void setAccount(Account account) {
 		this.account = account;
-	}
-	
-	public void setPrison(boolean prison) {
-		this.prison = prison;
-	}
-
-	public boolean getPrison() {
-		return prison;
 	}
 }
 

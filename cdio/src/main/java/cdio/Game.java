@@ -77,6 +77,25 @@ public class Game {
 			if (color == guiMessages[8]) {
 				car.setPrimaryColor(Color.YELLOW);
 			}
+			for(int k=i-1; k>=0; k--) {
+				while(GUI_Players[k].getCar().getPrimaryColor().equals(car.getPrimaryColor()))
+				{
+					color = gui.getUserButtonPressed("Your car has the same color as another players. Please pick a different color", guiMessages[5], guiMessages[6], guiMessages[7], guiMessages[8]);
+					if (color == guiMessages[5]) {
+						car.setPrimaryColor(Color.RED);
+					}
+					if (color == guiMessages[6]) {
+						car.setPrimaryColor(Color.GREEN);
+					}
+					if (color == guiMessages[7]) {
+						car.setPrimaryColor(Color.BLUE);
+					}
+					if (color == guiMessages[8]) {
+						car.setPrimaryColor(Color.YELLOW);
+					}
+					k=i-1;
+				}
+			}
 			GUI_Player Gui_Player = new GUI_Player(Players[i].getName(), Players[i].getAccount().getValue(), car);
 			GUI_Players[i] = Gui_Player;
 			gui.addPlayer(GUI_Players[i]);

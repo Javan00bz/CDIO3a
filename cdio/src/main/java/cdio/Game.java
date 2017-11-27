@@ -61,7 +61,7 @@ public class Game {
 					k=i-1;
 				}
 			}
-			Player player = new Player(playerName, startingMoney, 0);
+			Player player = new Player(playerName, startingMoney, 0); //hej
 			Players[i] = player;
 			String color = gui.getUserButtonPressed(guiMessages[2] + j + guiMessages[4], guiMessages[5], guiMessages[6], guiMessages[7], guiMessages[8]);
 			GUI_Car car = new GUI_Car();

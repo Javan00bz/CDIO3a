@@ -27,5 +27,6 @@ public class SpecialField extends Field {
 		if (getNameOfField().equals("DOLPHIN SHOW"))
 			gui.showMessage(pl.getName() + guiMessages[19] + getFee() + guiMessages[20]);
 		pl.getAccount().withdraw(getFee());
+		
 	}	
 }

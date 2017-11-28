@@ -4,7 +4,6 @@ import java.awt.Color;
 import cdio.Player;
 import gui_codebehind.GUI_FieldFactory;
 import gui_fields.GUI_Car;
-import gui_fields.GUI_Empty;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Player;
@@ -13,14 +12,14 @@ import gui_main.GUI;
 
 public class Game {
 
-	public GUI gui = new GUI(generateFields());
+	public GUI gui = new GUI(generateFields()); //Laver en ny GUI, og bruger generateFields metoden til at definiere felter.
 	private static GameBoard board = new GameBoard(GameBoard.generateGameFields());
-	private Player[] Players;
-	private GUI_Player[] GUI_Players;
+	private Player[] Players; //Laver et array som senere bliver fyldt med spillere
+	private GUI_Player[] GUI_Players; //Laver et array som senere bliver fyldt med GUI_Spillere
 	private int startingMoney;
-	private DiceCup cup = new DiceCup(1);
+	private DiceCup cup = new DiceCup(1); //Laver et raflebæger med en terning
 	private int amountOfPlayers;
-	String[] guiMessages = Translater.file("Gamefunctions.txt");
+	String[] guiMessages = Translater.file("Gamefunctions.txt"); //String Array der indeholder alle beskeder i spillet
 	private boolean winner = false;
 	public static void main(String[] args) {
 		new Game().playGame();
@@ -38,8 +37,8 @@ public class Game {
 
 	private void startGame() {
 		gui.showMessage(guiMessages[0]);
-		amountOfPlayers = gui.getUserInteger(guiMessages[1], 2, 4);
-		switch (amountOfPlayers) {
+		amountOfPlayers = gui.getUserInteger(guiMessages[1], 2, 4); //Får at vide hvor mange spillere der skal være i spillet
+		switch (amountOfPlayers) { //Sætter startingMoney afhængig af hvor mange spillere der er
 		case 2: startingMoney = 20;
 		break;
 		case 3: startingMoney = 18;
@@ -51,20 +50,20 @@ public class Game {
 		Player[] Players = new Player[amountOfPlayers];
 		GUI_Player[] GUI_Players = new GUI_Player[amountOfPlayers];
 		int j = 0;
-		for(int i=0; i < amountOfPlayers; i++) {
+		for(int i=0; i < amountOfPlayers; i++) { //Loop der laver alle spillere, GUI_Spillere og biler
 			j++;
 			String playerName = gui.getUserString(guiMessages[2] + j + guiMessages[3] );
-			for(int k=i-1; k>=0; k--) {
+			for(int k=i-1; k>=0; k--) { //Loop der checker om 2 spillere hedder det samme
 				while(Players[k].getName().equals(playerName))
 				{
 					playerName = gui.getUserString("You cant have the same name as another player. Please try again");
 					k=i-1;
 				}
 			}
-			Player player = new Player(playerName, startingMoney, 0); //hej
+			Player player = new Player(playerName, startingMoney, 0); 
 			Players[i] = player;
 			String color = gui.getUserButtonPressed(guiMessages[2] + j + guiMessages[4], guiMessages[5], guiMessages[6], guiMessages[7], guiMessages[8]);
-			GUI_Car car = new GUI_Car();
+			GUI_Car car = new GUI_Car(); //Laver en ny bil og sætter dens farve afhængig af en spilers input
 			if (color == guiMessages[5]) {
 				car.setPrimaryColor(Color.RED);
 			}
@@ -77,7 +76,7 @@ public class Game {
 			if (color == guiMessages[8]) {
 				car.setPrimaryColor(Color.YELLOW);
 			}
-			for(int k=i-1; k>=0; k--) {
+			for(int k=i-1; k>=0; k--) { //Checker om 2 biler har samme farve
 				while(GUI_Players[k].getCar().getPrimaryColor().equals(car.getPrimaryColor()))
 				{
 					color = gui.getUserButtonPressed("Your car has the same color as another players. Please pick a different color", guiMessages[5], guiMessages[6], guiMessages[7], guiMessages[8]);
@@ -109,24 +108,24 @@ public class Game {
 		gui.showMessage("" + p.getName() + guiMessages[9]);
 		cup.rollDiceCup();
 		gui.setDie(cup.getDice()[0].getFaceValue());
-		gui.getFields()[p.getPosition()].setCar(gp, false);
+		gui.getFields()[p.getPosition()].setCar(gp, false); //Fjerner spillerens biler fra pladen
 		p.setPosition(p.getPosition() + cup.getDice()[0].getFaceValue());
 		if (p.getPosition()<24)
-			gui.getFields()[p.getPosition()].setCar(gp, true);
-		else {
+			gui.getFields()[p.getPosition()].setCar(gp, true); //Sætter bilen på pladen igen
+		else { //Hvis bilen er nået rundt om brættet, trækkes 24 fra spillerens position
 			p.setPosition(p.getPosition()-24);
 			p.getAccount().deposit(2);
 			gp.setBalance(p.getAccount().getValue());
 			gui.getFields()[p.getPosition()].setCar(gp, true);
 		}
-		getBoard().resolveField(getBoard().getFields()[p.getPosition()], gui, (GUI_Street) gui.getFields()[p.getPosition()], p, gp);
+		getBoard().resolveField(getBoard().getFields()[p.getPosition()], gui, (GUI_Street) gui.getFields()[p.getPosition()], p, gp); //Laaaaaaang metode der styrer hvad der skal ske på feltet
 		for (int i = 0; i < Players.length; i++) {
 			GUI_Players[i].setBalance(Players[i].getAccount().getValue());
 		}
-		if (p.getAccount().getValue()<=0) {
+		if (p.getAccount().getValue()<=0) { //Slutter spillet hvis en spiller har 0 penge
 			endGame();
 		}
-		if(p.getPosition() == 3 || p.getPosition() == 15)
+		if(p.getPosition() == 3 || p.getPosition() == 15) //Giver spilleren en ekstratur hvis de lander på et train felt
 			playerTurn(p, gp);	
 	}
 
@@ -148,7 +147,6 @@ public class Game {
 		}
 		fields[1].setBackGroundColor(Color.red);
 		fields[2].setBackGroundColor(Color.red);
-		//fields[3]
 		fields[4].setBackGroundColor(Color.cyan);
 		fields[5].setBackGroundColor(Color.cyan);
 		fields[7].setBackGroundColor(Color.PINK);
@@ -168,7 +166,7 @@ public class Game {
 
 	private void endGame() { // Når playgame loop slutter, findes vinder ved højeste værdi.
 		Player winner = new Player(null, 0, 0);
-		for (int i=0; i<Players.length; i++) {
+		for (int i=0; i<Players.length; i++) { //Finder spilleren med den højeste balances
 			if (Players[i].getAccount().getValue()>winner.getAccount().getValue());
 			winner=Players[i];
 		}

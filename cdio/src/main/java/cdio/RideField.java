@@ -66,6 +66,7 @@ public class RideField extends Field {
 			street.setOwnerName(pl.getName());
 			pl.getAccount().withdraw(getPrice());
 			setOwner(pl);
+			
 		}
 	}
 }

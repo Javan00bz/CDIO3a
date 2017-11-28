@@ -12,7 +12,6 @@ public class PrisonField extends Field {
 	public PrisonField(String nameOfField, int fieldNumber, int fee) {
 		super(nameOfField, fieldNumber);
 		this.fee=fee;
-
 	}
 
 	public int getFee() {

@@ -2,7 +2,7 @@ package cdio;
 
 import java.awt.Color;
 import cdio.Player;
-
+import gui_codebehind.GUI_FieldFactory;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Empty;
 import gui_fields.GUI_Field;
@@ -148,6 +148,7 @@ public class Game {
 		}
 		fields[1].setBackGroundColor(Color.red);
 		fields[2].setBackGroundColor(Color.red);
+		//fields[3]
 		fields[4].setBackGroundColor(Color.cyan);
 		fields[5].setBackGroundColor(Color.cyan);
 		fields[7].setBackGroundColor(Color.PINK);

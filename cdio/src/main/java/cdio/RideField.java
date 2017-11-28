@@ -45,12 +45,12 @@ public class RideField extends Field {
 			int price = getPrice() * 2;
 			pl.getAccount().withdraw(price);
 			getOwner().getAccount().deposit(price);
-			gui.showMessage(pl.getName() + guiMessages[21] + getOwner().getName() + guiMessages[22] + price + guiMessages[23]);
+			gui.showMessage(pl.getName() + guiMessages[20] + getOwner().getName() + guiMessages[21] + price + guiMessages[22]);
 		}
 		else 
 		{ pl.getAccount().withdraw(getPrice());
 		getOwner().getAccount().deposit(getPrice());
-		gui.showMessage(pl.getName() + guiMessages[21] + getOwner().getName() + guiMessages[22] + getPrice() + guiMessages[23]);
+		gui.showMessage(pl.getName() + guiMessages[20] + getOwner().getName() + guiMessages[21] + getPrice() + guiMessages[22]);
 		}
 	}
 

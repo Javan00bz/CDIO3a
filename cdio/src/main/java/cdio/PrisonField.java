@@ -23,6 +23,7 @@ public class PrisonField extends Field {
 		this.fee = fee;
 	}
 
+
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
 		gui.showMessage(pl.getName() + guiMessages[18] + getFee());
 		pl.getAccount().withdraw(getFee());

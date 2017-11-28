@@ -37,23 +37,26 @@ public class RideField extends Field {
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
 		if (owner == null)
 			buyField(gui, street, pl, Gpl);
-		else payRent(pl);	
+		else payRent(gui, street, pl, Gpl);	
 	}
 
-	public void payRent(Player pl) {
+	public void payRent(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
 		if (GameBoard.sameOwner(Game.getBoard(), getFieldNumber() ) == true) {
 			int price = getPrice() * 2;
 			pl.getAccount().withdraw(price);
 			getOwner().getAccount().deposit(price);
+			gui.showMessage(pl.getName() + ", you landed on a field belongning to " + getOwner() + " and you have to pay " + price + "dollars");
 		}
 		else 
 		{ pl.getAccount().withdraw(getPrice());
 		getOwner().getAccount().deposit(getPrice());
+		gui.showMessage(pl.getName() + ", you landed on a field belongning to " + getOwner() + " and you have to pay " + getPrice() + "dollars");
 		}
 	}
 
+
 	public void buyField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
-		String userSelection = gui.getUserSelection(guiMessages[12], guiMessages[10], guiMessages[11]);
+		String userSelection = gui.getUserSelection(pl.getName() + guiMessages[12], guiMessages[10], guiMessages[11]);
 		if (userSelection == guiMessages[10]) {
 			street.setBorder(Gpl.getCar().getPrimaryColor());
 			street.setOwnerName(pl.getName());

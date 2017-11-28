@@ -23,6 +23,8 @@ public class SpecialField extends Field {
 	}
 
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
+		if (getNameOfField().equals("DOLPHIN SHOW"))
+			gui.showMessage(pl.getName() + ", You pay " + getFee() + " dollars to see the Dolphin Show");
 		pl.getAccount().withdraw(getFee());
 	}	
 }

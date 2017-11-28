@@ -10,7 +10,7 @@ YELLOW
 , click to roll
 YES
 NO
-Do you want to buy this field", "YES", "NO"
+, Do you want to buy this field", "YES", "NO"
 Congratulations
  you won!
  You've landed on a Train field. You get an extra turn. Click to roll again

@@ -7,6 +7,7 @@ import gui_main.GUI;
 public class PrisonField extends Field {
 
 	int fee = 1;
+	String[] guiMessages = Translater.file("Gamefunctions.txt");
 
 	public PrisonField(String nameOfField, int fieldNumber, int fee) {
 		super(nameOfField, fieldNumber);
@@ -23,7 +24,7 @@ public class PrisonField extends Field {
 	}
 
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
-		gui.showMessage(pl.getName() + ", You go to jail, and have to pay " + getFee());
+		gui.showMessage(pl.getName() + guiMessages[18] + getFee());
 		pl.getAccount().withdraw(getFee());
 		gui.getFields()[pl.getPosition()].setCar(Gpl, false);
 		pl.setPosition(6);

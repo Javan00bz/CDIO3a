@@ -7,6 +7,7 @@ import gui_main.GUI;
 public class SpecialField extends Field {
 
 	int fee;
+	String[] guiMessages = Translater.file("Gamefunctions.txt");
 	
 	public SpecialField(String nameOfField, int fieldNumber, int fee) {
 		super(nameOfField, fieldNumber);
@@ -24,7 +25,7 @@ public class SpecialField extends Field {
 
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
 		if (getNameOfField().equals("DOLPHIN SHOW"))
-			gui.showMessage(pl.getName() + ", You pay " + getFee() + " dollars to see the Dolphin Show");
+			gui.showMessage(pl.getName() + guiMessages[19] + getFee() + guiMessages[20]);
 		pl.getAccount().withdraw(getFee());
 	}	
 }

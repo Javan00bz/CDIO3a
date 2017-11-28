@@ -15,3 +15,6 @@ Congratulations
  you won!
  You've landed on a Train field. You get an extra turn. Click to roll again
  No action has been specified for this field
+ , You go to jail, and have to pay 
+ , You pay 
+  dollars to see the Dolphin Show

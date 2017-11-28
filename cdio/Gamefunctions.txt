@@ -18,3 +18,6 @@ Congratulations
  , You go to jail, and have to pay 
  , You pay 
   dollars to see the Dolphin Show 
+  , you landed on a field belongning to 
+   and you have to pay 
+   dollars

@@ -146,12 +146,12 @@ public class Game {
 			gui_street.setDescription(fieldText[i]);
 			fields[i] = gui_street;
 		}
-		fields[1].setBackGroundColor(Color.RED);
-		fields[2].setBackGroundColor(Color.RED);
-		fields[4].setBackGroundColor(Color.YELLOW);
-		fields[5].setBackGroundColor(Color.YELLOW);
-		fields[7].setBackGroundColor(Color.GREEN);
-		fields[8].setBackGroundColor(Color.GREEN);
+		fields[1].setBackGroundColor(Color.red);
+		fields[2].setBackGroundColor(Color.red);
+		fields[4].setBackGroundColor(Color.cyan);
+		fields[5].setBackGroundColor(Color.cyan);
+		fields[7].setBackGroundColor(Color.PINK);
+		fields[8].setBackGroundColor(Color.PINK);
 		fields[10].setBackGroundColor(Color.BLUE);
 		fields[11].setBackGroundColor(Color.BLUE);
 		fields[13].setBackGroundColor(Color.WHITE);

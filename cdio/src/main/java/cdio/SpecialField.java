@@ -21,6 +21,7 @@ public class SpecialField extends Field {
 
 	public void setFee(int fee) {
 		this.fee = fee;
+		
 	}
 
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {

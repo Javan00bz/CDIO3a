@@ -52,6 +52,7 @@ public class RideField extends Field {
 		getOwner().getAccount().deposit(getPrice());
 		gui.showMessage(pl.getName() + guiMessages[20] + getOwner().getName() + guiMessages[21] + getPrice() + guiMessages[22]);
 		}
+		
 	}
 
 

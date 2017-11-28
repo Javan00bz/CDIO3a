@@ -41,18 +41,21 @@ public class RideField extends Field {
 	}
 
 	public void payRent(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
-		if (GameBoard.sameOwner(Game.getBoard(), getFieldNumber() ) == true) {
-			int price = getPrice() * 2;
-			pl.getAccount().withdraw(price);
-			getOwner().getAccount().deposit(price);
-			gui.showMessage(pl.getName() + guiMessages[20] + getOwner().getName() + guiMessages[21] + price + guiMessages[22]);
+		while(!pl.equals(getOwner())) {
+			if (GameBoard.sameOwner(Game.getBoard(), getFieldNumber() ) == true) {
+				int price = getPrice() * 2;
+				pl.getAccount().withdraw(price);
+				getOwner().getAccount().deposit(price);
+				gui.showMessage(pl.getName() + guiMessages[20] + getOwner().getName() + guiMessages[21] + price + guiMessages[22]);
+				break;
+			}
+			else 
+			{ pl.getAccount().withdraw(getPrice());
+			getOwner().getAccount().deposit(getPrice());
+			gui.showMessage(pl.getName() + guiMessages[20] + getOwner().getName() + guiMessages[21] + getPrice() + guiMessages[22]);
+			break;
+			}
 		}
-		else 
-		{ pl.getAccount().withdraw(getPrice());
-		getOwner().getAccount().deposit(getPrice());
-		gui.showMessage(pl.getName() + guiMessages[20] + getOwner().getName() + guiMessages[21] + getPrice() + guiMessages[22]);
-		}
-		
 	}
 
 

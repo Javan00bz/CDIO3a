@@ -25,7 +25,7 @@ public class PrisonField extends Field {
 
 
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
-		gui.showMessage(pl.getName() + guiMessages[18] + getFee());
+		gui.showMessage(pl.getName() + guiMessages[17] + getFee());
 		pl.getAccount().withdraw(getFee());
 		gui.getFields()[pl.getPosition()].setCar(Gpl, false);
 		pl.setPosition(6);

@@ -25,7 +25,7 @@ public class SpecialField extends Field {
 
 	public void landOnField(GUI gui, GUI_Street street, Player pl, GUI_Player Gpl) {
 		if (getNameOfField().equals("DOLPHIN SHOW"))
-			gui.showMessage(pl.getName() + guiMessages[19] + getFee() + guiMessages[20]);
+			gui.showMessage(pl.getName() + guiMessages[18] + getFee() + guiMessages[19]);
 		pl.getAccount().withdraw(getFee());
 		
 	}	

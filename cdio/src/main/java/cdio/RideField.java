@@ -45,12 +45,12 @@ public class RideField extends Field {
 			int price = getPrice() * 2;
 			pl.getAccount().withdraw(price);
 			getOwner().getAccount().deposit(price);
-			gui.showMessage(pl.getName() + ", you landed on a field belongning to " + getOwner() + " and you have to pay " + price + "dollars");
+			gui.showMessage(pl.getName() + ", you landed on a field belongning to " + getOwner().getName() + " and you have to pay " + price + " dollars");
 		}
 		else 
 		{ pl.getAccount().withdraw(getPrice());
 		getOwner().getAccount().deposit(getPrice());
-		gui.showMessage(pl.getName() + ", you landed on a field belongning to " + getOwner() + " and you have to pay " + getPrice() + "dollars");
+		gui.showMessage(pl.getName() + ", you landed on a field belongning to " + getOwner().getName() + " and you have to pay " + getPrice() + " dollars");
 		}
 	}
 

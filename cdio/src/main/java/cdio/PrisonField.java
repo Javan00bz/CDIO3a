@@ -20,6 +20,7 @@ public class PrisonField extends Field {
 
 	public void setFee(int fee) {
 		this.fee = fee;
+		
 	}
 
 

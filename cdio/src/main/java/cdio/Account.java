@@ -4,7 +4,7 @@ package cdio;
 public class Account {
 	   
 	int value;
-	int zeeeeeeydel = 2;
+	
 	public Account(int V)
 	{
 		value = V;

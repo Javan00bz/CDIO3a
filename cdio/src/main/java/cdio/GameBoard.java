@@ -9,7 +9,6 @@ import cdio.Game;
 public class GameBoard {
 
 	public Field[] fields;
-	private Player noOwner;
 
 	public GameBoard(Field[] fields) {
 		this.fields = fields;
@@ -65,10 +64,11 @@ public class GameBoard {
 			if (board.getFields()[field+1].getOwner() != null) {
 				if (board.getFields()[field+1].getOwner().equals(board.getFields()[field].getOwner()))
 					return true;}
+			if (board.getFields()[field-1].getOwner() != null) {
+				if (board.getFields()[field-1].getOwner().equals(board.getFields()[field].getOwner()))
+					return true;}
 		}
-		else if (board.getFields()[field-1].getOwner() != null) {
-			if (board.getFields()[field-1].getOwner().equals(board.getFields()[field].getOwner()))
-				return true;}
+
 		return false;
 
 	}

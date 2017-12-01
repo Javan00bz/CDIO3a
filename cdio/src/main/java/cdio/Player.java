@@ -8,7 +8,6 @@ public class Player {
 	private String name;
 	private int position;
 	private Account account;
-	//private int firstRoll;
 	
 	public Player(String name, int balance, int position) {
 		this.name = name;

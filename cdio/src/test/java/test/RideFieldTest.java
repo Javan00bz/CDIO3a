@@ -125,14 +125,14 @@ public class RideFieldTest {
 	@Test
 	public final void testSetOwner() {
 		rf1.setOwner(o);
-		assertTrue(rf.getOwner()==o);
+		assertTrue(rf1.getOwner().equals(o));
 	}
 
 
 
 	@Test
 	public final void testGetNameOfField() {
-		assertTrue("START"==gui.getFields()[0].getTitle());
+		assertTrue("START".equals(gui.getFields()[0].getTitle()));
 	}
 
 	@Test

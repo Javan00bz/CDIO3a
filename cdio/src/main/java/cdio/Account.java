@@ -2,9 +2,9 @@ package cdio;
 
 //Klasse for spillerens konto. En konto indeholder en integer
 public class Account {
-	
+	   
 	int value;
-	
+	int zeeeeeeydel = 2;
 	public Account(int V)
 	{
 		value = V;

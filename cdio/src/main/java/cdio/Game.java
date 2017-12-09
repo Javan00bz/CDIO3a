@@ -11,8 +11,6 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 public class Game {
-
-	//test
 	
 	public GUI gui = new GUI(generateFields()); //Laver en ny GUI, og bruger generateFields metoden til at definiere felter.
 	private static GameBoard board = new GameBoard(GameBoard.generateGameFields());
